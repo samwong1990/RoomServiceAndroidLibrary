@@ -16,13 +16,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samwong.hk.roomservice.api.commons.dataFormat.AuthenticationDetails;
-import com.samwong.hk.roomservice.api.commons.dataFormat.Report;
-import com.samwong.hk.roomservice.api.commons.dataFormat.Response;
-import com.samwong.hk.roomservice.api.commons.dataFormat.ResponseWithReports;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.Operation;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ParameterKey;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ReturnCode;
+import hk.samwong.roomservice.commons.dataFormat.AuthenticationDetails;
+import hk.samwong.roomservice.commons.dataFormat.Report;
+import hk.samwong.roomservice.commons.dataFormat.Response;
+import hk.samwong.roomservice.commons.dataFormat.ResponseWithReports;
+import hk.samwong.roomservice.commons.parameterEnums.Operation;
+import hk.samwong.roomservice.commons.parameterEnums.ParameterKey;
+import hk.samwong.roomservice.commons.parameterEnums.ReturnCode;
 
 /**
  * Classifier returned the right room, so the data used in query can be saved as

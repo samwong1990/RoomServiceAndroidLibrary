@@ -15,13 +15,13 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samwong.hk.roomservice.api.commons.dataFormat.AuthenticationDetails;
-import com.samwong.hk.roomservice.api.commons.dataFormat.ResponseWithReports;
-import com.samwong.hk.roomservice.api.commons.dataFormat.WifiInformation;
-import com.samwong.hk.roomservice.api.commons.helper.InstanceFriendlyGson;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.Operation;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ParameterKey;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ReturnCode;
+import hk.samwong.roomservice.commons.dataFormat.AuthenticationDetails;
+import hk.samwong.roomservice.commons.dataFormat.ResponseWithReports;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
+import hk.samwong.roomservice.commons.helper.InstanceFriendlyGson;
+import hk.samwong.roomservice.commons.parameterEnums.Operation;
+import hk.samwong.roomservice.commons.parameterEnums.ParameterKey;
+import hk.samwong.roomservice.commons.parameterEnums.ReturnCode;
 
 /**
  * First way to use it, is to simply execute this. This would do a wifi scan and then do the api calls. You get the Reports in return.

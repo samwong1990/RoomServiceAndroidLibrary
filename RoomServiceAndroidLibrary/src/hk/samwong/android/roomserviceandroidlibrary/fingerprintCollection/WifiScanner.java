@@ -9,8 +9,8 @@ import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
-import com.samwong.hk.roomservice.api.commons.dataFormat.BssidStrength;
-import com.samwong.hk.roomservice.api.commons.dataFormat.WifiInformation;
+import hk.samwong.roomservice.commons.dataFormat.BssidStrength;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
 
 public class WifiScanner {
 

@@ -7,7 +7,7 @@ import android.app.Activity;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.samwong.hk.roomservice.api.commons.dataFormat.WifiInformation;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
 
 /**
  * Android may report old wifi scans if the calls are in quick sucession. We use this poller to collect new wifi fingerprints.

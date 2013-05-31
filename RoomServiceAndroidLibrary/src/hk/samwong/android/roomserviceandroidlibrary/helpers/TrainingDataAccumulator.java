@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import android.app.Activity;
 import android.util.Log;
 
-import com.samwong.hk.roomservice.api.commons.dataFormat.WifiInformation;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
 
 /**
  * Quick a hacky way of doing things. Looking for a better way to do this.

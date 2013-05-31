@@ -19,9 +19,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samwong.hk.roomservice.api.commons.dataFormat.AuthenticationDetails;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.Operation;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ParameterKey;
+import hk.samwong.roomservice.commons.dataFormat.AuthenticationDetails;
+import hk.samwong.roomservice.commons.parameterEnums.Operation;
+import hk.samwong.roomservice.commons.parameterEnums.ParameterKey;
 
 public abstract class GetListOfRooms extends
 		AsyncTaskWithExceptionsAndContext<Void, Void, List<String>> {

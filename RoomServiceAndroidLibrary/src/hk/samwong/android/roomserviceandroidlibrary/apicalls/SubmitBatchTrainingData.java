@@ -15,13 +15,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samwong.hk.roomservice.api.commons.dataFormat.AuthenticationDetails;
-import com.samwong.hk.roomservice.api.commons.dataFormat.Response;
-import com.samwong.hk.roomservice.api.commons.dataFormat.TrainingData;
-import com.samwong.hk.roomservice.api.commons.dataFormat.WifiInformation;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.Operation;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ParameterKey;
-import com.samwong.hk.roomservice.api.commons.parameterEnums.ReturnCode;
+import hk.samwong.roomservice.commons.dataFormat.AuthenticationDetails;
+import hk.samwong.roomservice.commons.dataFormat.Response;
+import hk.samwong.roomservice.commons.dataFormat.TrainingData;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
+import hk.samwong.roomservice.commons.parameterEnums.Operation;
+import hk.samwong.roomservice.commons.parameterEnums.ParameterKey;
+import hk.samwong.roomservice.commons.parameterEnums.ReturnCode;
 
 public abstract class SubmitBatchTrainingData extends
 		APICaller<List<WifiInformation>, Void, Response> {

@@ -1,6 +1,6 @@
 package hk.samwong.android.roomserviceandroidlibrary.constants;
 
-import com.samwong.hk.roomservice.api.commons.parameterEnums.Classifier;
+import hk.samwong.roomservice.commons.parameterEnums.Classifier;
 
 public interface Defaults {
 	public static final String SERVLET_URL = "http://project.samwong.hk:8080/RoomServiceServlet/api";
