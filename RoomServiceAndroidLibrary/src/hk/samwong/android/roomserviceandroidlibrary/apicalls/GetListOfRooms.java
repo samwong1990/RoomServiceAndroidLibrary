@@ -20,8 +20,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import hk.samwong.roomservice.commons.dataFormat.AuthenticationDetails;
+import hk.samwong.roomservice.commons.dataFormat.ResponseWithListOfRooms;
 import hk.samwong.roomservice.commons.parameterEnums.Operation;
 import hk.samwong.roomservice.commons.parameterEnums.ParameterKey;
+import hk.samwong.roomservice.commons.parameterEnums.ReturnCode;
 
 public abstract class GetListOfRooms extends
 		AsyncTaskWithExceptionsAndContext<Void, Void, List<String>> {
@@ -49,9 +51,14 @@ public abstract class GetListOfRooms extends
 			if (scanner.hasNext()) {
 				String result = scanner.next();
 				Log.i(LogTag.APICALL.toString(), result);
-				return new Gson().fromJson(result,
-						new TypeToken<List<String>>() {
+				ResponseWithListOfRooms response = new Gson().fromJson(result,
+						new TypeToken<ResponseWithListOfRooms>() {
 						}.getType());
+				if(response.getReturnCode().equals(ReturnCode.OK)){
+					return response.getListOfRooms();
+				}else{
+					throw new IOException(response.getExplanation());
+				}
 			}
 			Log.w(LogTag.APICALL.toString(),
 					"No response for the list of room query");

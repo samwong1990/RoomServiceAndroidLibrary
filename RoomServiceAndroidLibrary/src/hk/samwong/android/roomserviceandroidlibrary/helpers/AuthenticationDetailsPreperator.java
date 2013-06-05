@@ -39,7 +39,7 @@ public class AuthenticationDetailsPreperator implements LocationReceiver{
 				.withDeviceModel(Build.MODEL)
 				.withDeviceInstallID(Installation.id(context))
 				.withDeviceBrand(Build.BRAND)
-				.withDeviceManaufacturer(Build.MANUFACTURER)
+				.withDeviceManufacturer(Build.MANUFACTURER)
 				.withDeviceProduct(Build.PRODUCT)
 				.withDeviceLatitude(location.getLatitude())
 				.withDeviceLongitude(location.getLongitude())
