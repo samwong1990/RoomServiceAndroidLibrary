@@ -3,7 +3,7 @@ package hk.samwong.roomservice.android.library.constants;
 import hk.samwong.roomservice.commons.parameterEnums.Classifier;
 
 public interface Defaults {
-	public static final String ROOMSERVICE_SERVLET_URL = "http://project.samwong.hk:8080/RoomServiceServlet/api";
+	public static final String ROOMSERVICE_SERVLET_URL = "http://129.31.203.74:8080/RoomLevelLocator/api";
 	
 	public static final Classifier classifier = Classifier.ALL;
 	public static final int MAX_RETRIES = 5;
