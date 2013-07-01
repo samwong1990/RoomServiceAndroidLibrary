@@ -1,20 +1,21 @@
 package hk.samwong.roomservice.android.library.helpers;
 
 
+import hk.samwong.roomservice.android.library.constants.Defaults;
+import hk.samwong.roomservice.android.library.constants.LogTag;
+import hk.samwong.roomservice.android.library.fingerprintCollection.WifiScanner;
+import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import android.app.Activity;
+import android.os.SystemClock;
 import android.util.Log;
-
-import hk.samwong.roomservice.android.library.constants.LogTag;
-import hk.samwong.roomservice.android.library.fingerprintCollection.WifiScannerPoller;
-import hk.samwong.roomservice.commons.dataFormat.WifiInformation;
 
 /**
  * Quick a hacky way of doing things. Looking for a better way to do this.
- * Ideally the onPreExecute bit should be in doInBackground, yet AsyncTask but be started from UI thread.
+ * Ideally the onPreExecute bit should be in doInBackground, yet AsyncTask has to be started from UI thread.
  * ie it must be in either onPreExecute / onProgressUpdate / onPostExecute
  * 
  * I do want to keep onProgressUpdate for real progress update, so I've decided to put it in onPreExecute.
@@ -29,10 +30,7 @@ public abstract class TrainingDataAccumulator extends
 		AsyncTaskWithExceptions<Activity, WifiInformation, List<WifiInformation>> {
 
 	private final String roomName;
-	private final List<WifiInformation> fingerprintList = new ArrayList<WifiInformation>();;
-	private final TrainingDataAccumulator trainingAsyncTask = this;
-	private final CountDownLatch blocker = new CountDownLatch(1);
-	private WifiScannerPoller poller;
+	private final List<WifiInformation> fingerprintList = new ArrayList<WifiInformation>();
 	
 	public TrainingDataAccumulator(String roomName){
 		this.roomName = roomName;
@@ -41,23 +39,23 @@ public abstract class TrainingDataAccumulator extends
 	@Override
 	protected abstract void onCancelled(List<WifiInformation> results);
 	
-	@Override
-	protected void onPreExecute() {
-		poller = new WifiScannerPoller() {
-			@Override
-			protected void onProgressUpdate(WifiInformation... scanResult) {
-				if(!trainingAsyncTask.isCancelled()){
-					fingerprintList.add(scanResult[0]);
-					trainingAsyncTask.publishProgress(scanResult[0]);
-				}else{
-					this.cancel(false);
-				}
-			}
-			protected void onCancelled() {
-				blocker.countDown();
-			};
-		};
-	}
+//	@Override
+//	protected void onPreExecute() {
+//		poller = new WifiScannerPoller() {
+//			@Override
+//			protected void onProgressUpdate(WifiInformation... scanResult) {
+//				if(!trainingAsyncTask.isCancelled()){
+//					fingerprintList.add(scanResult[0]);
+//					trainingAsyncTask.publishProgress(scanResult[0]);
+//				}else{
+//					this.cancel(false);
+//				}
+//			}
+//			protected void onCancelled() {
+//				blocker.countDown();
+//			};
+//		};
+//	}
 	
 	@Override
 	protected List<WifiInformation> doInBackground(Activity... params) {
@@ -66,20 +64,23 @@ public abstract class TrainingDataAccumulator extends
 		}
 		final Activity activity = params[0];
 		// execute the poller
-		activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				poller.execute(activity);
+		WifiInformation datapoint = null;
+		WifiInformation prevScan = null;
+		
+		long lastUpdate = System.currentTimeMillis();
+		while(!isCancelled()){
+			datapoint = WifiScanner.getWifiInformation(activity);
+		
+			if(!datapoint.equals(prevScan)){
+				Log.i(LogTag.CLIENT.toString(), "Obtained new fingerprint after " + (lastUpdate - System.currentTimeMillis()) + "ms");
+				prevScan = datapoint;
+				lastUpdate = System.currentTimeMillis();
+				publishProgress(datapoint);
+				fingerprintList.add(datapoint);
+			}else{
+				Log.v(LogTag.CLIENT.toString(), "Same old fingerprint");
 			}
-		});
-		// block until polling is completed
-		while(blocker.getCount() != 0){
-			try {
-				blocker.await();
-			} catch (InterruptedException e) {
-				addException(e);
-				Log.e(LogTag.CLIENT.toString(), "Interupted while waiting for WifiPoller to finish.");
-			}
+			SystemClock.sleep(Defaults.SAMPLING_INTERVAL_IN_MILLISEC);
 		}
 		return fingerprintList;
 	}

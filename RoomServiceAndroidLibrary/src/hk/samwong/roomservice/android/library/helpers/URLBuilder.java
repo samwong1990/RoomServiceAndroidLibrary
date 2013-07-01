@@ -1,7 +1,5 @@
 package hk.samwong.roomservice.android.library.helpers;
 
-import hk.samwong.roomservice.android.library.constants.Defaults;
-
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,8 +10,8 @@ import org.apache.http.NameValuePair;
 
 
 public class URLBuilder {
-	public static URL build(List<NameValuePair> nvps) throws UnsupportedEncodingException, MalformedURLException{
-		StringBuilder url = new StringBuilder(Defaults.ROOMSERVICE_SERVLET_URL);
+	public static URL build(String servletUrl, List<NameValuePair> nvps) throws UnsupportedEncodingException, MalformedURLException{
+		StringBuilder url = new StringBuilder(servletUrl);
 		url.append("?");
 		for (int i = 0; i < nvps.size(); i++) {
 			NameValuePair nvp = nvps.get(i);
